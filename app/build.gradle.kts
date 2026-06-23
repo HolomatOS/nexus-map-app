@@ -10,6 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.example.nexusmap"
         minSdk = 26
+        multiDexEnabled = true
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
