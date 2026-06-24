@@ -333,11 +333,11 @@ fun MapScreen() {
                         mapViewRef?.let{ mv->
                             val fromPt:GeoPoint? = when {
                                 fromText.isBlank() -> myLocation?:locationOverlay?.myLocation?:run{showToast("WAITING FOR GPS");null}
-                                fromText.matches(Regex("-?[0-9]+\.[0-9]+,\s*-?[0-9]+\.[0-9]+")) -> fromText.split(",").let{GeoPoint(it[0].trim().toDouble(),it[1].trim().toDouble())}
+                                isCoord(fromText) -> fromText.split(",").let{GeoPoint(it[0].trim().toDouble(),it[1].trim().toDouble())}
                                 else -> RouteService.geocode(fromText)
                             }
                             val toPt:GeoPoint? = when {
-                                toText.matches(Regex("-?[0-9]+\.[0-9]+,\s*-?[0-9]+\.[0-9]+")) -> toText.split(",").let{GeoPoint(it[0].trim().toDouble(),it[1].trim().toDouble())}
+                                isCoord(toText) -> toText.split(",").let{GeoPoint(it[0].trim().toDouble(),it[1].trim().toDouble())}
                                 else -> RouteService.geocode(toText)
                             }
                             if(fromPt==null||toPt==null){showToast("LOCATION NOT FOUND");isLoadingRoute=false;return@let}
