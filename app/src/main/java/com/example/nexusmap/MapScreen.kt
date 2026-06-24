@@ -95,6 +95,13 @@ private fun makeArrowBitmap(): Bitmap {
     return bmp
 }
 
+
+private fun isCoord(s: String): Boolean {
+    val parts = s.split(",")
+    if (parts.size != 2) return false
+    return parts[0].trim().toDoubleOrNull() != null && parts[1].trim().toDoubleOrNull() != null
+}
+
 @Composable
 fun MapScreen() {
     val context = LocalContext.current
