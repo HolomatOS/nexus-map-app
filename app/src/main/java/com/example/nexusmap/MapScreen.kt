@@ -197,8 +197,8 @@ fun MapScreen() {
         if (granted) {
             mapView?.let { mv ->
                 val overlay = MyLocationNewOverlay(GpsMyLocationProvider(context), mv)
+                overlay.setDirectionArrow(makeCircleBitmap(), makeArrowBitmap())
                 overlay.enableMyLocation()
-                overlay.enableFollowLocation()
                 mv.overlays.add(overlay)
                 locationOverlay = overlay
                 mv.invalidate()
