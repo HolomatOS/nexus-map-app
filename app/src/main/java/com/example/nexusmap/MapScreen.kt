@@ -733,4 +733,3 @@ private fun NxFab(icon: String, active: Boolean = false, onClick: () -> Unit) {
         Text(icon, color = if (active) CyanColor else CyanColor.copy(alpha = 0.8f), fontSize = 18.sp)
     }
 }
-
