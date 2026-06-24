@@ -88,6 +88,37 @@ private fun cartoLight() = object : OnlineTileSourceBase(
         "${baseUrl.trimEnd('/')}/light_all/${MapTileIndex.getZoom(pMapTileIndex)}/${MapTileIndex.getX(pMapTileIndex)}/${MapTileIndex.getY(pMapTileIndex)}.png"
 }
 
+
+private fun makeCircleBitmap(): Bitmap {
+    val s = 64; val bmp = Bitmap.createBitmap(s, s, Bitmap.Config.ARGB_8888)
+    val cv = ACanvas(bmp); val r = s / 2f
+    cv.drawCircle(r, r, r, APaint(APaint.ANTI_ALIAS_FLAG).apply { color = android.graphics.Color.argb(60, 33, 150, 243) })
+    cv.drawCircle(r, r, r * 0.68f, APaint(APaint.ANTI_ALIAS_FLAG).apply { color = android.graphics.Color.WHITE })
+    cv.drawCircle(r, r, r * 0.52f, APaint(APaint.ANTI_ALIAS_FLAG).apply { color = android.graphics.Color.rgb(33, 150, 243) })
+    return bmp
+}
+
+private fun makeArrowBitmap(): Bitmap {
+    val s = 80; val bmp = Bitmap.createBitmap(s, s, Bitmap.Config.ARGB_8888)
+    val cv = ACanvas(bmp); val cx = s / 2f
+    val path = APath().apply {
+        moveTo(cx, s * 0.04f)
+        lineTo(s * 0.85f, s * 0.90f)
+        lineTo(cx, s * 0.62f)
+        lineTo(s * 0.15f, s * 0.90f)
+        close()
+    }
+    cv.drawPath(path, APaint(APaint.ANTI_ALIAS_FLAG).apply { color = android.graphics.Color.argb(60, 0, 0, 0) })
+    cv.drawPath(path, APaint(APaint.ANTI_ALIAS_FLAG).apply { color = android.graphics.Color.rgb(33, 150, 243) })
+    cv.drawPath(path, APaint(APaint.ANTI_ALIAS_FLAG).apply {
+        color = android.graphics.Color.WHITE
+        style = APaint.Style.STROKE
+        strokeWidth = s * 0.07f
+        strokeJoin = APaint.Join.ROUND
+    })
+    return bmp
+}
+
 @Composable
 fun MapScreen() {
     val context = LocalContext.current
